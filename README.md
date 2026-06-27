@@ -1,6 +1,6 @@
 # Building an Engineering Command Center
 
-![Engineering Command Center](docs/assets/engineering-command-center.jpg)
+![Engineering Command Center](docs/assets/engineering-command-center.png)
 
 I'm thrilled to share a major milestone in how I run Aerial MECHANICA. After weeks of testing and iteration, I've built a living engineering command center — not just another folder of notes, but a connected graph that treats every part of our aerial technologies, websites, CAD models, test data, regulations, and business plans as one intelligent system.
 

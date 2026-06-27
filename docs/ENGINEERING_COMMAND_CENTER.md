@@ -1,6 +1,6 @@
 # Building an Engineering Command Center: My Obsidian + Hermes Knowledge Vault for Complex Aerospace Systems
 
-![Engineering command center — graph map with Hermes dispatcher](./assets/engineering-command-center.jpg)
+![Engineering command center — graph map with Hermes dispatcher](./assets/engineering-command-center.png)
 
 I'm thrilled to share a major milestone in how I run Aerial MECHANICA. After weeks of testing and iteration, I've built a living engineering command center — not just another folder of notes, but a connected graph that treats every part of our aerial technologies, websites, CAD models, test data, regulations, and business plans as one intelligent system.
 
