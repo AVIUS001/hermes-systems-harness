@@ -2,6 +2,14 @@
 
 Open-source **agentic systems engineering harness**: requirements, tests, artifacts, and compliance evidence as an explicit graph with change propagation, Hermes execution agents, and Obsidian export.
 
+## About
+
+![Engineering command center — graph map with Hermes dispatcher](docs/assets/engineering-command-center.jpg)
+
+**The graph is the map. Hermes is the dispatcher.** This repo is the open framework behind a living engineering command center for complex aerospace systems — requirements, CAD, tests, compliance, and business artifacts as one connected graph.
+
+Read the full narrative: **[Building an Engineering Command Center](docs/ENGINEERING_COMMAND_CENTER.md)** — how Obsidian + Hermes turns change impact into traceable, agent-assisted workflows at Aerial MECHANICA / Aerial Labs.
+
 [![G-Stack](https://img.shields.io/badge/G--Stack-ready-blue)](https://github.com)
 
 This repository publishes the **framework** and a **sample graph** (`harness/graph/graph.sample.json`). Your private program data, full graph, memory files, and local paths stay **outside** the public boundary — see [docs/SETUP.md](docs/SETUP.md).
@@ -49,6 +57,7 @@ Before pushing to GitHub, run:
 
 | Path | Purpose |
 |------|---------|
+| [docs/ENGINEERING_COMMAND_CENTER.md](docs/ENGINEERING_COMMAND_CENTER.md) | Narrative: graph-as-map, Hermes dispatcher, daily workflow |
 | [docs/SETUP.md](docs/SETUP.md) | Clone, init, configure local paths |
 | [harness/README.md](harness/README.md) | Harness commands and architecture |
 | [harness/SKILL.md](harness/SKILL.md) | Agent operating procedures |
