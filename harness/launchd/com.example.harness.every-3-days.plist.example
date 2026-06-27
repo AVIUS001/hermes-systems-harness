@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+  "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.example.harness.every-3-days</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/usr/bin/python3</string>
+    <string>REPO_ROOT/harness/scripts/local_update.py</string>
+    <string>--mode</string>
+    <string>tri_day</string>
+    <string>--calendar</string>
+    <string>--llm</string>
+  </array>
+  <key>WorkingDirectory</key>
+  <string>REPO_ROOT</string>
+  <key>StartInterval</key>
+  <integer>259200</integer>
+  <key>StandardOutPath</key>
+  <string>REPO_ROOT/harness/updates/every-3-days.launchd.log</string>
+  <key>StandardErrorPath</key>
+  <string>REPO_ROOT/harness/updates/every-3-days.launchd.err</string>
+</dict>
+</plist>

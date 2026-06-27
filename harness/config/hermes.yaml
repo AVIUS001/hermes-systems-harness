@@ -1,0 +1,90 @@
+# Hermes execution-layer configuration (public-safe defaults).
+# bootstrap_hermes.py seeds the graph from the same architecture.
+# Program-specific CAD and platform seeds belong in harness/local/bootstrap_extension.py.
+
+version: "0.1.0"
+program: "Demo Program"
+operator: "Your Organization"
+system_of_record: "harness/graph/graph.json"
+
+principles:
+  - "Graph first: every agent action starts from a node and writes back to nodes, edges, audits, or notes."
+  - "Local first: secret-bearing engineering context stays on the local vault unless explicitly approved."
+  - "Human approval: safety, certification, public posting, spending, CAD mutation, and production changes require approval."
+  - "Traceability: every CAD, software, test, compliance, and business artifact links back to requirements."
+
+runtimes:
+  local_workstation:
+    role: "Canonical vault, CAD/sim access, Obsidian, local LLM runtime"
+    permissions: ["read", "analyze", "write_vault", "export_obsidian"]
+  hostinger_vps:
+    role: "Optional always-on runner for non-secret agent jobs and status dashboards"
+    permissions: ["read_sanitized_graph", "run_scheduled_checks", "serve_public_slices"]
+    hold_until_approved: ["provision_server", "deploy_public_endpoint", "attach_payment", "copy_private_sources"]
+  nvidia_ecosystem:
+    role: "Candidate acceleration path for simulation, digital twin, robotics, edge AI, and GPU inference"
+    assets_to_evaluate: ["NVIDIA Inception", "NVIDIA Developer Program", "NGC", "Omniverse/OpenUSD", "Isaac", "NIM/NeMo"]
+  human:
+    role: "Program architect and safety/certification decision maker"
+
+agents:
+  hermes_orchestrator:
+    node: "agent-hermes-orchestrator"
+    scope: "Turn graph state into work packets, dispatch bounded agents, collect audits"
+  requirements_curator:
+    node: "agent-requirements-curator"
+    scope: "Normalize requirements and maintain bidirectional traceability"
+  cad_interface_steward:
+    node: "agent-cad-interface-steward"
+    scope: "Track Fusion CAD assemblies, interfaces, budgets, and affected tests"
+  compliance_runner:
+    node: "agent-compliance-runner"
+    scope: "Map evidence to regulations and reopen stale compliance checks"
+  platform_operator:
+    node: "agent-platform-operator"
+    scope: "Sync platform registry and sanitized website/API slices"
+  publication_operator:
+    node: "agent-publication-operator"
+    scope: "Draft public artifacts only; publishing requires approval"
+  overnight_sentinel:
+    node: "agent-overnight-sentinel"
+    scope: "Read-only health checks, stale-node detection, and next-action queue while the human sleeps"
+  email_briefing:
+    node: "agent-email-briefing"
+    scope: "Compile today/yesterday memory links, weekly summary, and to-do list for configured recipient"
+
+overnight_policy:
+  allowed:
+    - "Run sync/export if local source fingerprints changed"
+    - "Run overnight_health.py --write"
+    - "Draft email briefings into harness/outbox"
+    - "Run impact_analysis.py --audit on changed graph nodes"
+    - "Draft notes, issues, test revisions, and compliance summaries inside the vault"
+  blocked_without_approval:
+    - "Send email, social posts, or customer messages"
+    - "Publish to production domains"
+    - "Upgrade cloud hosting or buy resources"
+    - "Modify CAD source of record"
+    - "Submit certification or safety artifacts externally"
+
+email_briefing:
+  recipient_env: "HERMES_BRIEF_RECIPIENT"
+  recipient_default: "you@example.com"
+  default_mode: "draft"
+  draft_command: "python3 harness/scripts/memory_email_brief.py --write"
+  send_command: "python3 harness/scripts/memory_email_brief.py --send --yes"
+  send_with_env_file: "python3 harness/scripts/memory_email_brief.py --env-file harness/config/email.env --send --yes"
+  smtp_env:
+    host: "HERMES_SMTP_HOST"
+    port: "HERMES_SMTP_PORT"
+    username: "HERMES_SMTP_USER"
+    password: "HERMES_SMTP_PASSWORD"
+    from_addr: "HERMES_SMTP_FROM"
+  cadence:
+    daily: "today/yesterday memory links plus to-do list"
+    weekly: "weekly synthesis plus to-do list"
+
+references:
+  nvidia_inception: "https://www.nvidia.com/en-us/startups/"
+  nvidia_developer_program: "https://developer.nvidia.com/developer-program"
+  hostinger_vps: "https://www.hostinger.com/vps-hosting"

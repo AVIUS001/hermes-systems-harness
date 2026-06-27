@@ -1,0 +1,47 @@
+# Local Hermes bootstrap extension
+
+The public repo ships **generic** Hermes seeds in `harness/scripts/bootstrap_hermes.py`.
+
+Program-specific content — CAD assembly IDs, proprietary platform names, local filesystem paths, and business artifacts — belongs here in `harness/local/bootstrap_extension.py`.
+
+## How it works
+
+On each run, `bootstrap_hermes.py`:
+
+1. Seeds generic framework nodes (requirements, agents, services, interfaces)
+2. If present, loads `harness/local/bootstrap_extension.py` via `importlib` and calls `seed(g)`
+
+## Create your extension
+
+```python
+"""Local-only Hermes seeds."""
+
+from lib.graph import GraphBuilder
+
+
+def seed(g: GraphBuilder) -> None:
+    g.upsert({
+        "id": "artifact-cad-example-1",
+        "type": "artifact",
+        "title": "Your CAD assembly",
+        "status": "review_required",
+        "owner": "cad_interface_steward",
+    })
+    g.edge("artifact-cad-example-1", "req-cad-revision-impact-trace", "satisfies", "Impact traceable CAD")
+```
+
+## Git boundary
+
+Everything under `harness/local/` is **gitignored** except this `README.example` file.
+
+Never commit real paths, email addresses, or proprietary part numbers to the public repository.
+
+## Related config
+
+| File | Purpose |
+|------|---------|
+| `harness/config/sources.yaml` | Ingest source paths (also gitignored) |
+| `harness/platforms/registry.yaml` | Platform repo paths and org IDs |
+| `USER.md` / `TOOLS.md` | Personal context and local commands |
+
+Run `./harness/scripts/init_local.sh` after cloning to create local config from examples.

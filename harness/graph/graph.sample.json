@@ -1,0 +1,195 @@
+{
+  "version": "1.1.0",
+  "meta": {
+    "program": "Demo Program",
+    "operator": "Your Organization",
+    "domain": "example.com",
+    "last_ingest": null,
+    "last_change": "2026-06-27T00:00:00+00:00"
+  },
+  "nodes": [
+    {
+      "id": "foundation-demo",
+      "type": "requirement",
+      "title": "Demo program foundation — requirements and verification basis",
+      "status": "active",
+      "owner": "systems_engineer",
+      "metadata": { "role": "foundational_basis" }
+    },
+    {
+      "id": "req-thermal-op-max",
+      "type": "requirement",
+      "title": "Max operating temperature shall be 50°C",
+      "status": "active",
+      "owner": "systems_engineer",
+      "source_kind": "sample",
+      "metadata": { "parameter": "operating_temperature_c", "value": 50 }
+    },
+    {
+      "id": "budget-thermal-inverter",
+      "type": "budget",
+      "title": "Inverter thermal margin budget",
+      "status": "active",
+      "owner": "systems_engineer",
+      "source_kind": "sample"
+    },
+    {
+      "id": "process-finish-standard",
+      "type": "process",
+      "title": "Standard finish requirements",
+      "status": "active",
+      "owner": "systems_engineer",
+      "source_kind": "sample"
+    },
+    {
+      "id": "test-bench-cooling",
+      "type": "test_procedure",
+      "title": "Inner flow cooling bench test",
+      "status": "active",
+      "owner": "verification",
+      "source_kind": "sample"
+    },
+    {
+      "id": "regulation-cooling-tests",
+      "type": "regulation",
+      "title": "Cooling verification basis (demo)",
+      "status": "active",
+      "owner": "certification",
+      "source_kind": "sample"
+    },
+    {
+      "id": "artifact-sim-config",
+      "type": "artifact",
+      "title": "Demo simulation configuration",
+      "status": "active",
+      "owner": "simulation",
+      "source_kind": "sample"
+    },
+    {
+      "id": "agent-hermes-orchestrator",
+      "type": "agent",
+      "title": "Hermes Orchestrator Agent",
+      "status": "active",
+      "owner": "harness",
+      "source_kind": "sample"
+    },
+    {
+      "id": "process-hermes-execution-loop",
+      "type": "process",
+      "title": "Hermes graph-native execution loop",
+      "status": "active",
+      "owner": "harness",
+      "source_kind": "sample"
+    },
+    {
+      "id": "service-github-open-source",
+      "type": "service",
+      "title": "GitHub open-source publication surface",
+      "status": "active",
+      "owner": "systems_engineer",
+      "source_kind": "sample"
+    },
+    {
+      "id": "platform-hermes-vault-control-plane",
+      "type": "platform",
+      "title": "Hermes Vault Control Plane",
+      "status": "active",
+      "owner": "systems_engineer",
+      "source_kind": "sample"
+    },
+    {
+      "id": "interface-hermes-obsidian-graph",
+      "type": "interface",
+      "title": "Hermes to Obsidian graph export interface",
+      "status": "active",
+      "owner": "systems_engineer",
+      "source_kind": "sample"
+    },
+    {
+      "id": "org-example",
+      "type": "platform",
+      "title": "Example Organization",
+      "status": "active",
+      "owner": "systems_engineer",
+      "metadata": { "entity_type": "organization", "role": "program_holding" }
+    },
+    {
+      "id": "decision-hermes-local-first",
+      "type": "decision",
+      "title": "Stage Hermes locally first, then mirror sanitized work to optional remote runners",
+      "status": "active",
+      "owner": "systems_engineer",
+      "source_kind": "sample"
+    },
+    {
+      "id": "req-hermes-overnight-guardrails",
+      "type": "requirement",
+      "title": "Hermes agents shall perform overnight work only inside approved vault boundaries",
+      "status": "active",
+      "owner": "systems_engineer",
+      "source_kind": "sample"
+    }
+  ],
+  "edges": [
+    {
+      "from": "req-thermal-op-max",
+      "to": "foundation-demo",
+      "relation": "derives_from",
+      "rationale": "Thermal requirement under program foundation"
+    },
+    {
+      "from": "req-thermal-op-max",
+      "to": "budget-thermal-inverter",
+      "relation": "affects",
+      "rationale": "Operating temperature limit drives thermal margin"
+    },
+    {
+      "from": "req-thermal-op-max",
+      "to": "process-finish-standard",
+      "relation": "affects",
+      "rationale": "Material and coating selection tied to temperature"
+    },
+    {
+      "from": "req-thermal-op-max",
+      "to": "test-bench-cooling",
+      "relation": "affects",
+      "rationale": "Cooling bench verifies thermal requirement"
+    },
+    {
+      "from": "req-thermal-op-max",
+      "to": "regulation-cooling-tests",
+      "relation": "affects",
+      "rationale": "Regulatory cooling basis linked to requirement"
+    },
+    {
+      "from": "req-thermal-op-max",
+      "to": "artifact-sim-config",
+      "relation": "affects",
+      "rationale": "Simulation config must reflect updated thermal limit"
+    },
+    {
+      "from": "test-bench-cooling",
+      "to": "req-thermal-op-max",
+      "relation": "verifies",
+      "rationale": "Bench test verifies thermal requirement"
+    },
+    {
+      "from": "agent-hermes-orchestrator",
+      "to": "process-hermes-execution-loop",
+      "relation": "implements",
+      "rationale": "Orchestrator runs the Hermes execution loop"
+    },
+    {
+      "from": "interface-hermes-obsidian-graph",
+      "to": "platform-hermes-vault-control-plane",
+      "relation": "implements",
+      "rationale": "Obsidian export is the primary human navigation boundary"
+    },
+    {
+      "from": "decision-hermes-local-first",
+      "to": "req-hermes-overnight-guardrails",
+      "relation": "satisfies",
+      "rationale": "Local-first staging preserves overnight guardrails"
+    }
+  ]
+}

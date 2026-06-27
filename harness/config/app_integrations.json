@@ -1,0 +1,152 @@
+{
+  "version": "1.0.0",
+  "generated_for": "2026-06-14",
+  "program": "Aerial Labs",
+  "operator": "Aerial Industries Pte. Ltd. Singapore",
+  "privacy_policy": {
+    "default_mode": "local_read_only",
+    "outbound_actions": "disabled_without_explicit_human_approval",
+    "calendar": "read upcoming events for scheduling context only",
+    "mail_notes_messages": "off by default; enable per adapter only when needed",
+    "summaries": "write to this vault and graph, not to public services"
+  },
+  "schedules": {
+    "every_3_days_update": {
+      "local_time": "07:30",
+      "interval_days": 3,
+      "script": "harness/scripts/local_update.py --mode tri_day --calendar --llm"
+    },
+    "weekly_update": {
+      "local_day": "Monday",
+      "local_time": "08:00",
+      "script": "harness/scripts/local_update.py --mode weekly --calendar --llm"
+    }
+  },
+  "local_llm": {
+    "provider": "ollama",
+    "offline_only": true,
+    "preferred_model_family": "gemma",
+    "model_candidates": ["gemma4:latest", "gemma3:latest", "gemma2:latest", "gemma:latest"],
+    "binary_candidates": [
+      "ollama",
+      "/Applications/Ollama.app/Contents/Resources/ollama",
+      "/usr/local/bin/ollama",
+      "/opt/homebrew/bin/ollama"
+    ],
+    "fallback": "deterministic_summary_if_gemma_unavailable"
+  },
+  "adapters": {
+    "calendar": {
+      "app": "Calendar",
+      "path": "/System/Applications/Calendar.app",
+      "enabled": true,
+      "access": "read_only",
+      "adapter": "osascript_calendar_events",
+      "window_days": 7,
+      "writes_to": ["harness/updates/daily", "harness/updates/weekly", "harness/graph/graph.json"]
+    },
+    "reminders": {
+      "app": "Reminders",
+      "path": "/System/Applications/Reminders.app",
+      "enabled": false,
+      "access": "read_only",
+      "adapter": "osascript_reminders_due",
+      "reason_disabled": "Enable after Calendar loop is stable."
+    },
+    "mail": {
+      "app": "Mail",
+      "path": "/System/Applications/Mail.app",
+      "enabled": false,
+      "access": "read_only",
+      "adapter": "osascript_mail_unread",
+      "reason_disabled": "Email content is high sensitivity; use only for explicit urgent-inbox checks."
+    },
+    "notes": {
+      "app": "Notes",
+      "path": "/System/Applications/Notes.app",
+      "enabled": false,
+      "access": "read_only",
+      "adapter": "osascript_notes_recent",
+      "reason_disabled": "Notes can contain unrelated private material."
+    },
+    "shortcuts": {
+      "app": "Shortcuts",
+      "path": "/System/Applications/Shortcuts.app",
+      "enabled": true,
+      "access": "local_execute_with_human_defined_shortcuts",
+      "adapter": "shortcuts_cli",
+      "use": "Optional bridge for approved local automations."
+    },
+    "obsidian": {
+      "app": "Obsidian",
+      "path": "/Applications/Obsidian.app",
+      "enabled": true,
+      "access": "local_files",
+      "adapter": "vault_graph_markdown",
+      "use": "Human navigation surface for graph exports and update summaries."
+    },
+    "codex": {
+      "app": "Codex",
+      "path": "/Applications/Codex.app",
+      "enabled": true,
+      "access": "agent_workspace",
+      "adapter": "harness_skill",
+      "use": "Execution agent for graph maintenance, impact analysis, and summaries."
+    },
+    "claude": {
+      "app": "Claude",
+      "path": "/Applications/Claude.app",
+      "enabled": true,
+      "access": "manual_agent_surface",
+      "adapter": "gstack_handoff_notes",
+      "use": "Optional review/QA surface via G-Stack conventions."
+    },
+    "ollama": {
+      "app": "Ollama",
+      "path": "/Applications/Ollama.app",
+      "enabled": true,
+      "access": "local_llm",
+      "adapter": "offline_gemma_summary",
+      "use": "Offline Gemma synthesis for every-three-days and weekly learning updates."
+    },
+    "matlab": {
+      "app": "MATLAB_R2024a",
+      "path": "/Applications/MATLAB_R2024a.app",
+      "enabled": true,
+      "access": "manual_analysis",
+      "adapter": "analysis_artifact_links",
+      "use": "Link generated analysis outputs back to requirements/tests."
+    },
+    "mathematica": {
+      "app": "Mathematica",
+      "path": "/Applications/Mathematica.app",
+      "enabled": true,
+      "access": "manual_analysis",
+      "adapter": "analysis_artifact_links",
+      "use": "Link notebooks and computations back to graph artifacts."
+    },
+    "fusion": {
+      "app": "Autodesk Fusion",
+      "path": "/Applications/Autodesk Fusion.app",
+      "enabled": true,
+      "access": "manual_cad",
+      "adapter": "cad_artifact_links",
+      "use": "Register CAD model revisions and downstream impact against requirements."
+    },
+    "blender": {
+      "app": "Blender",
+      "path": "/Applications/Blender.app",
+      "enabled": true,
+      "access": "manual_cad_visualization",
+      "adapter": "cad_visual_artifact_links",
+      "use": "Register visual/simulation artifacts produced from CAD."
+    },
+    "messaging": {
+      "apps": ["Slack", "Discord", "Microsoft Teams", "WhatsApp", "Messages"],
+      "enabled": false,
+      "access": "no_outbound_by_default",
+      "adapter": "none",
+      "reason_disabled": "External or interpersonal actions require explicit human approval."
+    }
+  }
+}

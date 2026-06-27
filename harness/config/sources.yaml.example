@@ -1,0 +1,57 @@
+# Copy to harness/config/sources.yaml and set paths to your local ingest sources.
+# Do not commit sources.yaml — it may contain paths to proprietary data.
+
+terminology:
+  replacements:
+    - pattern: "(?i)\\blegacy_label\\b"
+      replacement: "Your Organization Legal Name"
+
+organization:
+  legal_name: "Your Organization Legal Name"
+  program: "Your Program"
+  domain: "example.com"
+
+sources:
+  processes:
+    path: "/path/to/process_library"
+    manifest: "manifest.csv"
+    projects_dir: "projects"
+    role: "Process standards library"
+    node_type: process
+
+  collaborations:
+    path: "/path/to/collaboration_data"
+    role: "Collaboration and due diligence data"
+    node_type: artifact
+
+  work_orders:
+    path: "/path/to/work_orders"
+    role: "Quality and test procedure work orders"
+    node_type: test_procedure
+    normalize_filenames: true
+
+  regulations:
+    - path: "/path/to/due_diligence_matrix.xlsx"
+      id: "dd-eval"
+      role: "Due diligence evaluation matrix"
+    - path: "/path/to/rrl_calculator.xlsx"
+      id: "rrl-calculator"
+      role: "Regulatory readiness calculator"
+
+  compliance_mappings:
+    - path: "/path/to/bench_compliance.csv"
+      id: "bench-compliance"
+      domain: "bench_test"
+    - path: "/path/to/flight_compliance.csv"
+      id: "flight-compliance"
+      domain: "flight_test"
+
+  flight_test_support:
+    - path: "/path/to/test_matrix.csv"
+    - path: "/path/to/flight_findings.csv"
+    - path: "/path/to/bench_findings.csv"
+
+# Optional sync fingerprint paths (local only). If omitted, sync.py derives paths from sources above.
+sync:
+  obsidian_symlink: "/path/to/Obsidian/export-symlink"
+  watch_paths: []

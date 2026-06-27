@@ -1,0 +1,92 @@
+# Technical Readiness Level gates — agency-neutral test elevation
+# Links to test_procedure and regulation nodes in graph
+
+levels:
+  - trl: 3
+    name: analytical_and_bench_proof
+    gates:
+      - process_conformity_to_acs_standards
+      - material_and_finish_per_q03_series
+      - preliminary_sp_assessment
+    example_tests:
+      - Q7002_weight_balance_propellers
+      - Q7003_manufacturing_limits
+      - bench_configuration_lock
+
+  - trl: 4
+    name: component_validation
+    gates:
+      - emc_screening
+      - cybersecurity_evaluation
+      - spray_system_inspection_standards
+    example_tests:
+      - Q04006_electromagnetic_compatibility
+      - Q04007_cybersecurity
+      - Q03004_spray_tank_nozzle_inspection
+
+  - trl: 4
+    name: propulsion_bench_substantiation
+    gates:
+      - dual_spool_operation
+      - thermal_margin_bench
+      - blade_pass_vibration_screen
+    example_tests:
+      - ic2e_bench_F01_F18
+      - pda_pm_compliance_bench_runs
+
+  - trl: 5
+    name: vehicle_integration
+    gates:
+      - flight_demonstration_complete_build
+      - emergency_abort_mission
+      - allocator_rotor_out_handling
+    example_tests:
+      - Q04106_flight_demonstration
+      - Q13001_emergency_warning_abort
+      - TCCA_ROTOR_CLUSTER_FAILURE
+
+  - trl: 6
+    name: envelope_and_performance
+    gates:
+      - part21_analog_flight_matrix
+      - static_and_dynamic_stability
+      - vibration_and_buffeting
+      - noise_screening_analog
+    example_tests:
+      - PERF_523053_TAKEOFF
+      - SNC_523181_DYNAMIC_STABILITY
+      - SNC_523251_VIBRATION
+      - NOISE_FTR_ANALOG
+
+  - trl: 7
+    name: operations_and_maintenance
+    gates:
+      - sop_particulars_ga_directives
+      - maintenance_repair_procedures
+      - service_provider_operational_sop
+    example_tests:
+      - Q15002_sop_ga_directives
+      - Q04008_maintenance_repair
+      - drone_spray_service_sop
+
+  - trl: 8
+    name: certification_readiness
+    gates:
+      - uav_conformity_checklist
+      - rrl_calculator_phase_completion
+      - due_diligence_evaluation_matrix
+      - do160_planning_complete
+    example_tests:
+      - Q04104_uav_conformity
+      - rrl_tc_p1_p6_oa_p7_p9
+      - droneconduct_dd_eval
+
+  - trl: 9
+    name: production_and_field_ops
+    gates:
+      - pma_pm_repeatability
+      - regional_sp_immersion_evidence
+      - field_service_work_orders_closed
+    example_tests:
+      - ic2e_F16_F17_production_acceptance
+      - ipollen8_work_order_closure

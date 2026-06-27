@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AerialLabsSystemsGraph",
+  "type": "object",
+  "required": ["version", "nodes", "edges", "meta"],
+  "properties": {
+    "version": { "type": "string" },
+    "meta": {
+      "type": "object",
+      "properties": {
+        "program": { "type": "string" },
+        "operator": { "type": "string" },
+        "last_ingest": { "type": "string" },
+        "last_change": { "type": "string" }
+      }
+    },
+    "nodes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "type", "title"],
+        "properties": {
+          "id": { "type": "string" },
+          "type": {
+            "enum": [
+              "requirement",
+              "regulation",
+              "test_procedure",
+              "artifact",
+              "process",
+              "platform",
+              "compliance_evidence",
+              "budget",
+              "interface",
+              "decision",
+              "agent",
+              "service"
+            ]
+          },
+          "title": { "type": "string" },
+          "status": {
+            "enum": [
+              "active",
+              "draft",
+              "review_required",
+              "stale",
+              "revision_needed",
+              "closed",
+              "blocked"
+            ]
+          },
+          "owner": { "type": "string" },
+          "source_path": { "type": "string" },
+          "source_kind": { "type": "string" },
+          "metadata": { "type": "object" },
+          "body": { "type": "string" }
+        }
+      }
+    },
+    "edges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["from", "to", "relation"],
+        "properties": {
+          "from": { "type": "string" },
+          "to": { "type": "string" },
+          "relation": {
+            "enum": [
+              "derives_from",
+              "satisfies",
+              "verifies",
+              "implements",
+              "affects",
+              "hosted_on",
+              "compliance_maps_to",
+              "owned_by",
+              "blocks",
+              "elevates_trl"
+            ]
+          },
+          "rationale": { "type": "string" },
+          "metadata": { "type": "object" }
+        }
+      }
+    }
+  }
+}

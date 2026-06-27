@@ -1,0 +1,41 @@
+# OS / Python
+.DS_Store
+__pycache__/
+*.pyc
+*.pyo
+
+# Private vault continuity (never publish)
+MEMORY.md
+USER.md
+TOOLS.md
+memory/
+.openclaw/
+.cursor/
+.cursorignore
+**/agent-transcripts/
+
+# Proprietary engineering graph and Obsidian export
+harness/graph/graph.json
+/graph/
+!harness/graph/graph.sample.json
+
+# Local-only configuration (copy from *.example)
+harness/config/sources.yaml
+harness/config/email.env
+harness/platforms/registry.yaml
+harness/config/macos_apps.generated.json
+
+# Local Hermes extensions (program-specific seeds)
+harness/local/*
+!harness/local/README.example
+
+# macOS launchd plists with machine-specific paths (copy from *.plist.example)
+harness/launchd/*.plist
+!harness/launchd/*.plist.example
+
+# Operational / generated artifacts
+harness/outbox/
+harness/state/
+harness/updates/
+harness/.venv/
+harness/audit/

@@ -1,0 +1,31 @@
+# Copy to harness/platforms/registry.yaml and set paths to your local platform repos.
+# Do not commit registry.yaml — it may contain machine-specific paths.
+
+program:
+  name: Your Program
+  url: https://example.com
+
+organizations:
+  - id: org-example
+    name: Example Organization
+    url: https://example.com
+
+foundation:
+  id: foundation-demo
+  title: Program foundation — regulations and in-house requirements
+  sources:
+    - source-process-library
+    - source-dd-eval
+    - source-compliance-csv
+
+platforms:
+  - id: platform-example
+    name: Example Platform
+    owner: org-example
+    path: /path/to/platform/repo
+
+harness:
+  sync: harness/scripts/sync.sh
+  sync_force: harness/scripts/sync.sh --force
+  graph: harness/graph/graph.json
+  obsidian: graph/

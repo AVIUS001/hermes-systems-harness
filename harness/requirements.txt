@@ -1,0 +1,4 @@
+# Optional — ingest.py works with stdlib only
+pyyaml>=6.0
+openpyxl>=3.1
+pandas>=2.0
